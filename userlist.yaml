@@ -1,0 +1,7 @@
+---
+- uservar:
+    - 'testuser'
+    - 'testuser2'
+    - 'fakeuser'
+- user: 'testuser'
+
