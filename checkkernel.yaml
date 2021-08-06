@@ -1,0 +1,14 @@
+---
+-
+# simple playbook to check kernel version
+  hosts: localhost
+  name: "chk knl"
+  tasks:
+    -
+      name: "outpt knl"
+      register: output
+      shell: |
+        uname -r
+
+    -
+      debug: "var=output.stdout_lines"
