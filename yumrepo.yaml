@@ -1,0 +1,14 @@
+---
+-
+# simple playbook to check the contents of the yum repository
+  hosts: localhost
+  name: "check os linux"
+  tasks:
+     -
+        name: "what os"
+        register: shell_result
+        shell:  |
+           yum repoinfo
+     -
+        debug:
+          var: shell_result.stdout_lines
