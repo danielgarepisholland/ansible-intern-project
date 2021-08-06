@@ -1,0 +1,27 @@
+  hosts: localhost
+  name: "update check"
+  tasks:
+    -
+# if this is a Redhat/rhel type Linux OS, checks for update
+      name: "rhel"
+      register: output
+      shell: 'yum check-update || test $? -eq 100'
+      when: ansible_facts['os_family'] == "RedHat"
+    -
+      debug: "var=output.stdout_lines"
+    -
+# if ubuntu/debian, checks for update
+      name: "ubuntu"
+      register: output
+      shell: apt list --upgradeable
+      when: ansible_facts['os_family'] == "Debian"
+    -
+      debug: "var=output.sdout_lines"
+    -
+# checks for update if alpine
+      name: "alpine"
+      register: output
+      shell: apk update
+      when: ansible_facts['os_family'] == "Alpine"
+    -
+      debug: "var=output.stdout_lines"
